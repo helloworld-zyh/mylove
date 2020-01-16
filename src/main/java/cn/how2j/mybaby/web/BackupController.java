@@ -19,35 +19,44 @@ import cn.hutool.core.util.StrUtil;
 
 @RestController
 public class BackupController {
-	@Autowired PostService postService;
-	@Autowired PostDAO postDAO;
-	@Autowired ConfigDAO configDAO;
-	@Autowired PictureService pictureService;
-	@Autowired VideoService videoService;
-	@Autowired ConfigService configService;
-	
-	
-	@GetMapping("/backup/allinfo")
-	public Object allInfo(@RequestParam("password") String password) {
-		if(!valid(password))
-			return null;
-		List<Post> posts=postDAO.findAll();
-		pictureService.fillAll(posts);
-		videoService.fillAll(posts);
-		return posts;
-	}
-	@GetMapping("/backup/config")
-	public Object config(@RequestParam("password") String password) {
-		if(!valid(password))
-			return null;
-		List<Config> configs=configDAO.findAll();
-		return configs;
-	}
-	@GetMapping("/backup/valid")
-	public boolean valid(@RequestParam("password") String password) {
-		String passwordInDb=configService.get(configService.passwordAdmin);
-		return StrUtil.equals(password, passwordInDb);
-	}
+    @Autowired
+    PostService postService;
+    @Autowired
+    PostDAO postDAO;
+    @Autowired
+    ConfigDAO configDAO;
+    @Autowired
+    PictureService pictureService;
+    @Autowired
+    VideoService videoService;
+    @Autowired
+    ConfigService configService;
+
+
+    @GetMapping("/backup/allinfo")
+    public Object allInfo(@RequestParam("password") String password) {
+        if (!valid(password)) {
+            return null;
+        }
+        List<Post> posts = postDAO.findAll();
+        pictureService.fillAll(posts);
+        videoService.fillAll(posts);
+        return posts;
+    }
+
+    @GetMapping("/backup/config")
+    public Object config(@RequestParam("password") String password) {
+        if (!valid(password))
+            return null;
+        List<Config> configs = configDAO.findAll();
+        return configs;
+    }
+
+    @GetMapping("/backup/valid")
+    public boolean valid(@RequestParam("password") String password) {
+        String passwordInDb = configService.get(configService.passwordAdmin);
+        return StrUtil.equals(password, passwordInDb);
+    }
 //	
 //	@GetMapping("/backup/picture")
 //	public Object allInfo( @RequestParam("password") String password,@RequestParam("pid") int pid,HttpServletRequest request,HttpServletResponse response) throws Exception {
@@ -74,12 +83,6 @@ public class BackupController {
 //		
 //		
 //	}
-	
-	
-	
-	
-	
-	
-	
+
 
 }

@@ -18,7 +18,7 @@ public class Application extends SpringBootServletInitializer{
     	LogPrintStream.init();
     	System. setProperty("java.awt.headless", "false");
     	SpringApplication.run(Application.class, args);
-    	System.out.println("http://127.0.0.1:8080/mybaby/admin_post_list");
+    	System.out.println("http://127.0.0.1:8085/mybaby/admin_post_list");
     	
     }
 }
